@@ -11,13 +11,6 @@ import (
 	"github.com/joho/godotenv"
 )
 
-type input struct {
-	accountName   string
-	accountKey    string
-	containerName string
-	blobName      string
-}
-
 var (
 	Version     string
 	Commit      string
