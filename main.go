@@ -34,10 +34,16 @@ func main() {
 	accountKey := getGlobalValue("accountKey")
 	containerName := getGlobalValue("containerName")
 	blobName := getGlobalValue("blobName")
+	duration := getGlobalValue("duration")
 
-	if accountName == "" || accountKey == "" || containerName == "" || blobName == "" {
+	if accountName == "" || accountKey == "" || containerName == "" || blobName == "" || duration == "" {
 		fmt.Println("Please provide all the required parameters")
 		return
+	}
+
+	txpireTime, err := time.ParseDuration(duration)
+	if err != nil {
+		panic(err)
 	}
 
 	credential, err := azblob.NewSharedKeyCredential(accountName, accountKey)
@@ -51,7 +57,7 @@ func main() {
 		BlobName:   blobName,
 		Protocol:   sas.ProtocolHTTPS,
 		StartTime:  time.Now().UTC(),
-		ExpiryTime: time.Now().UTC().Add(48 * time.Hour),
+		ExpiryTime: time.Now().UTC().Add(txpireTime),
 		Permissions: to.Ptr(sas.BlobPermissions{
 			Read: true,
 		}).String(),
