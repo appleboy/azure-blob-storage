@@ -30,10 +30,10 @@ func main() {
 
 	_ = godotenv.Load(envfile)
 
-	accountName := getGlobalValue("accountName")
-	accountKey := getGlobalValue("accountKey")
-	containerName := getGlobalValue("containerName")
-	blobName := getGlobalValue("blobName")
+	accountName := getGlobalValue("account_name")
+	accountKey := getGlobalValue("account_key")
+	containerName := getGlobalValue("container_name")
+	blobName := getGlobalValue("blob_name")
 	duration := getGlobalValue("duration")
 
 	if accountName == "" || accountKey == "" || containerName == "" || blobName == "" || duration == "" {
