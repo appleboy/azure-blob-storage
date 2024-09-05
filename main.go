@@ -73,5 +73,6 @@ func main() {
 		blobName,
 		sasQueryParams.Encode(),
 	)
-	fmt.Println(sasURL)
+	fmt.Println("Blob URL:", sasURL)
+	fmt.Println("Expires at:", time.Now().UTC().Add(txpireTime))
 }
