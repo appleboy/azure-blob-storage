@@ -80,9 +80,9 @@ func main() {
 
 	if github != "" {
 		gh.SetOutput(map[string]string{
-			"blob_url":        sasURL,
-			"expires_at":      time.Now().UTC().Add(txpireTime).String(),
-			"expires_at_unix": fmt.Sprintf("%d", time.Now().UTC().Add(txpireTime).Unix()),
+			"blob_url":       sasURL,
+			"expire_at":      time.Now().UTC().Add(txpireTime).String(),
+			"expire_at_unix": fmt.Sprintf("%d", time.Now().UTC().Add(txpireTime).Unix()),
 		})
 	}
 }
