@@ -8,6 +8,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/to"
 	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob"
 	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/sas"
+	"github.com/appleboy/com/gh"
 	"github.com/joho/godotenv"
 )
 
@@ -35,6 +36,7 @@ func main() {
 	containerName := getGlobalValue("container_name")
 	blobName := getGlobalValue("blob_name")
 	duration := getGlobalValue("duration")
+	github := getGlobalValue("github")
 
 	if accountName == "" || accountKey == "" || containerName == "" || blobName == "" || duration == "" {
 		fmt.Println("Please provide all the required parameters")
@@ -75,4 +77,12 @@ func main() {
 	)
 	fmt.Println("Blob URL:", sasURL)
 	fmt.Println("Expires at:", time.Now().UTC().Add(txpireTime))
+
+	if github != "" {
+		gh.SetOutput(map[string]string{
+			"blob_url":        sasURL,
+			"expires_at":      time.Now().UTC().Add(txpireTime).String(),
+			"expires_at_unix": fmt.Sprintf("%d", time.Now().UTC().Add(txpireTime).Unix()),
+		})
+	}
 }
