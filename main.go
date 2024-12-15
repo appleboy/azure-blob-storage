@@ -79,7 +79,7 @@ func main() {
 	fmt.Println("Expires at:", time.Now().UTC().Add(txpireTime))
 
 	if github != "" {
-		gh.SetOutput(map[string]string{
+		_ = gh.SetOutput(map[string]string{
 			"blob_url":       sasURL,
 			"expire_at":      time.Now().UTC().Add(txpireTime).String(),
 			"expire_at_unix": fmt.Sprintf("%d", time.Now().UTC().Add(txpireTime).Unix()),
